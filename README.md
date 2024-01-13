@@ -4,7 +4,7 @@ This is a PowerShell script that creates symbolic links for all files with a spe
 
 ## Description
 
-The script recursively searches for all files with a specific extension in the source directory and its subdirectories. For each file, it creates a symbolic link in the destination directory. If a symbolic link already exists, it skips the file and moves on to the next one.
+The script recursively searches for all files with a specific extension in the source directory and its subdirectories. For each file, it creates a symbolic link in the destination directory. If a symbolic link already exists, it skips the file and moves on to the next one. Note that it will also remove deprecated symbolic links (i.e. symbolic links in the destination folder that no longer point to a valid file).
 
 ## License
 This repository uses the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
