@@ -9,6 +9,21 @@ param (
     [string]$extension = "*.gguf"
 )
 
+# Get all the symbolic links in the destination folder
+$links = Get-ChildItem -Path $destination -Recurse | Where-Object { $_.Attributes -match 'ReparsePoint' }
+
+# Loop through each link
+foreach ($link in $links) {
+    # Check if the link is deprecated
+    if (!(Test-Path -Path $link.Target)) {
+        # Remove the deprecated link
+        Remove-Item -Path $link.FullName -Force
+
+        # Write a message to indicate the link removal
+        Write-Host "Removed deprecated symbolic link for $($link.Name)."
+    }
+}
+
 # Get all the files with the specified extension in the source folder and its subfolders
 $files = Get-ChildItem -Path $source -Filter $extension -Recurse
 
